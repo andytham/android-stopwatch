@@ -4,7 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
-
+import org.apache.commons.lang3.time.StopWatch;
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -16,17 +16,34 @@ public class MainActivity extends AppCompatActivity {
     public void onStartButton(View view){
         // get operation
         // get current time
-        TextView timer = findViewById(R.id.timer);
-        String currentTimeString = timer.getText().toString();
-        long currentTime = Long.parseLong(currentTimeString);
 
-        long startTime =  System.nanoTime();
-        //begin counting
-        while(true){
-            currentTime = currentTime + (System.nanoTime() - startTime);
-            timer.setText(Long.toString(currentTime));
-            startTime =  System.nanoTime();
-        }
 
+        StopWatch stopWatch = new StopWatch();
+        stopWatch.start();
+        Thread t = new Thread(){
+            @Override
+            public void run(){
+                Boolean paused = false;
+                try {
+                    while(!isInterrupted()){
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                TextView timer = findViewById(R.id.timer);
+                                String currentTimeString = timer.getText().toString();
+                                long currentTime = Long.parseLong(currentTimeString);
+                                long time = System.nanoTime();
+                                timer.setText(Long.toString(time));
+
+                            }
+                        });
+
+                    }
+                } catch (Exception e){
+
+                }
+            }
+        };
+        t.start();
     }
 }

@@ -33,4 +33,8 @@ public class MainActivity extends AppCompatActivity {
             }
         }, 0, 1); // every millisecond
     }
+
+    public void onResetButton(View view){
+        currentTime = 0;
+    }
 }

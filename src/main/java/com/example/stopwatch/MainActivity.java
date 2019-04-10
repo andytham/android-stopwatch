@@ -13,6 +13,10 @@ public class MainActivity extends AppCompatActivity {
     private int seconds = 0;
     private int minutes = 0;
     private int hours = 0;
+    private String stringMilliseconds = "000";
+    private String stringSeconds = "00";
+    private String stringMinutes = "00";
+    private String stringHours = "00";
     private String timeString;
     private TextView display;
     @Override
@@ -36,7 +40,29 @@ public class MainActivity extends AppCompatActivity {
                 seconds = (currentTime / 1000) % 60;
                 minutes = currentTime / 1000 / 60;
                 hours = currentTime / 1000 / 360;
-                timeString = Integer.toString(hours) + ":" + Integer.toString(minutes) + ":" + Integer.toString(seconds) + "." + Integer.toString(milliseconds);
+
+                stringMilliseconds = Integer.toString(milliseconds);
+                if (milliseconds < 100){
+                    if (milliseconds < 10){
+                        stringMilliseconds = "0" + stringMilliseconds;
+                    }
+                    stringMilliseconds = "0" + stringMilliseconds;
+                }
+                stringSeconds = Integer.toString(seconds);
+                if (seconds < 10){
+                    stringSeconds = "0" + Integer.toString(seconds);
+                }
+                stringMinutes = Integer.toString(minutes);
+                if (minutes < 10){
+                    stringMinutes = "0" + stringMinutes;
+                }
+                stringHours = Integer.toString(hours);
+                if (hours < 10){
+                    stringHours = "0" + stringHours;
+                }
+
+
+                timeString = stringHours + ":" + stringMinutes + ":" + stringSeconds + ":" + stringMilliseconds;
                 display.setText(timeString);
                 }
             });

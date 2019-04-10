@@ -79,8 +79,7 @@ public class MainActivity extends AppCompatActivity {
             timer.scheduleAtFixedRate(timerTask, 0, 1); // every millisecond
         } else {
             startButton.setText("START");
-//            timer.cancel();
-            onStopTimer();
+            timer.cancel();
         }
     }
     public void onStopTimer(){
@@ -88,7 +87,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onResetButton(View view){
-        timer.cancel();
         currentTime = 0;
+        display.setText("00:00:00:000");
+        startButton.setText("START");
+        timer.cancel();
     }
 }

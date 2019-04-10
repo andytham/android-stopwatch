@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView display;
     private TextView startButton;
     private Timer timer;
+    private boolean isStopped = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,16 +69,21 @@ public class MainActivity extends AppCompatActivity {
 
                         timeString = stringHours + ":" + stringMinutes + ":" + stringSeconds + ":" + stringMilliseconds;
                         display.setText(timeString);
+                        if (isStopped){
+                            timer.cancel();
+                        }
                     }
                 });
             }
         };
         String buttonText = startButton.getText().toString();
         if (buttonText == "START") {
+            isStopped = false;
             timer = new Timer();
             startButton.setText("PAUSE");
             timer.scheduleAtFixedRate(timerTask, 0, 1); // every millisecond
         } else {
+            isStopped = true;
             startButton.setText("START");
             timer.cancel();
         }
@@ -87,9 +93,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onResetButton(View view){
-        currentTime = 0;
+//        timer.cancel();
         display.setText("00:00:00:000");
+        isStopped = true;
+        currentTime = 0;
         startButton.setText("START");
-        timer.cancel();
     }
 }

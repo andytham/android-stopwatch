@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">Stopwatch</string>
     <string name="stopwatch">Stopwatch</string>
-    <string name="start">Start</string>
-    <string name="lap">Lap</string>
-    <string name="reset">Reset</string>
-    <string name="timer">4141</string>
+    <string name="start">START</string>
+    <string name="lap">LAP</string>
+    <string name="reset">RESET</string>
+    <string name="timer">00:00:00:000</string>
 </resources>

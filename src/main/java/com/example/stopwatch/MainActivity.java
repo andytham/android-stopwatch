@@ -113,7 +113,12 @@ public class MainActivity extends AppCompatActivity {
         laps.add(currentLap);
         String lapsString = "";
         for(int i = 0; i < laps.size(); i++){
-            lapsString = lapsString + i + laps.get(i) + "\n";
+            String j = Integer.toString(i);
+            if(i < 10) {
+                j = "0" + j;
+            }
+
+            lapsString = lapsString + j + ": " + laps.get(i) + "\n";
         }
         lapsList.setText(lapsString);
     }
